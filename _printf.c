@@ -2,6 +2,7 @@
 /**
  * _printf - Printf function
  * @format: format.
+ * Description _printf: a functionto replace printf
  * Return: Printed chars.
  */
 int _printf(const char *format, ...)
