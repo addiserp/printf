@@ -26,10 +26,10 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(buffer, &ii);
-			f = get_flags(format, &i);
+			/*f = get_flags(format, &i);
 			w = get_width(format, &i, ap);
 			p = get_precision(format, &i, ap);
-			s = get_size(format, &i);
+			s = get_size(format, &i);*/
 			++i;
 			printed = handle_print(format, &i, ap, buffer,
 				f, w, p, s);
