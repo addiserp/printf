@@ -1,52 +1,46 @@
 #include "main.h"
 /**
- *_printf: a print function.
- *@format: a parameter.
- *Description _printf: a function that returns no of chars.
- *return: return size of input.
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
  */
-
-int _printf(const char* format, ...)
+int _printf(const char *format, ...)
 {
-	const char types[] = "cs";
-	char* s;
-	char p;
-	int i = 0,tot = 0;
-	va_list ap;
+	int i, printed = 0, printed_chars = 0;
+	int flags = 0, width = 0, precision = 0, size = 0;
+	int buff_ind = 0;
+	va_list list;
+	char buffer[BUFF_SIZE];
 
-	va_start(ap, format);
+	if (format == NULL)
+		return (-1);
 
-	while (format[i] != '\0')
+	va_start(list, format);
+
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
 		{
-			i++;
-			switch (format[i + 1])
-			{
-			case 'c':
-				p = va_arg(ap, int);
-				_putchar(p);
-				sum++;
-				break;
-			case 's':
-				s = va_arg(ap, char*);
-				while (!s)
-				{
-					_putchar(s);
-					s++;
-					sum++;
-				}
-				break;
-			}
+			buffer[buff_ind++] = format[i];
+			if (buff_ind == BUFF_SIZE)
+				print_buffer(buffer, &buff_ind);
+			printed_chars++;
 		}
 		else
 		{
-			p = format[i];
-			_putchar(p);
-			sum++;
+			print_buffer(buffer, &buff_ind);
+			++i;
+			printed = handle_print(format, &i, list, buffer,
+				flags, width, precision, size);
+			if (printed == -1)
+				return (-1);
+			printed_chars += printed;
 		}
-		i++;
 	}
-	return (sum);
-}
 
+	print_buffer(buffer, &buff_ind);
+
+	va_end(list);
+
+	return (printed_chars);
+}
