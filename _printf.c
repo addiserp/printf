@@ -7,7 +7,7 @@
 int _printf(const char *format, ...)
 {
 	int i, printed = 0, printed_chars = 0;
-	int flags = 0, width = 0, precision = 0, size = 0, buff_ind = 0;
+	int f = 0, w = 0, p = 0, s = 0, ii = 0;
 	va_list ap;
 	char buffer[BUFF_SIZE];
 
@@ -18,27 +18,27 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
+			buffer[ii++] = format[i];
+			if (ii == BUFF_SIZE)
+				print_buffer(buffer, &ii);
 			printed_chars++;
 		}
 		else
 		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, ap);
-			precision = get_precision(format, &i, ap);
-			size = get_size(format, &i);
+			print_buffer(buffer, &ii);
+			f = get_flags(format, &i);
+			w = get_width(format, &i, ap);
+			p = get_precision(format, &i, ap);
+			s = get_size(format, &i);
 			++i;
 			printed = handle_print(format, &i, ap, buffer,
-				flags, width, precision, size);
+				f, w, p, s);
 			if (printed == -1)
 				return (-1);
 			printed_chars += printed;
 		}
 	}
-	print_buffer(buffer, &buff_ind);
+	print_buffer(buffer, &ii);
 	va_end(ap);
 	return (printed_chars);
 }

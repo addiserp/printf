@@ -3,10 +3,10 @@
 /************************* WRITE HANDLE *************************/
 /**
  * handle_write_char - Prints a string
- * @c: parameter char types.
- * @buffer: parameter Buffer array to handle print
- * @flags:  parameter Calculates active flags.
- * @width: parameter get width.
+ * @c: char types.
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags.
+ * @width: get width.
  * @precision: precision specifier
  * @size: Size specifier
  *

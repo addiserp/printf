@@ -22,10 +22,10 @@ int print_char(va_list types, char buffer[],
 /************************* PRINT A STRING *************************/
 /**
  * print_string - Prints a string
- * @types: parameter List a of arguments
- * @buffer: parameter Buffer array to handle print
- * @flags: parameter Calculates active flags
- * @width: parameter get width.
+ * @types: List a of arguments
+ * @buffer: Buffer array to handle print
+ * @flags:  Calculates active flags
+ * @width: get width.
  * @precision: Precision specification
  * @size: Size specifier
  * Return: Number of chars printed
@@ -185,4 +185,17 @@ int print_binary(va_list types, char buffer[],
 		}
 	}
 	return (count);
+}
+
+/**
+ * print_buffer - Prints the contents of the buffer if it exist
+ * @buffer: Array of chars
+ * @buff_ind: Index at which to add next char, represents the length.
+ */
+void print_buffer(char buffer[], int *buff_ind)
+{
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
+
+	*buff_ind = 0;
 }
